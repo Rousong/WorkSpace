@@ -1,27 +1,30 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="viewport"
+          content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
     <title>Work Space</title>
     <!-- 新 Bootstrap 核心 CSS 文件 -->
-<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
- 
-<!-- 可选的Bootstrap主题文件（一般不使用） -->
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
- 
-<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
- 
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="style.css" type="text/css" />
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- 可选的Bootstrap主题文件（一般不使用） -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css" type="text/css"/>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script type="text/javascript" src="chat.js"></script>
     <script type="text/javascript" src="search.js"></script>
-    
+
 
 </head>
 
@@ -96,106 +99,107 @@
 
     <div id="page-wrap">
 
-        
+
         <p style="color: white">我是</p>
-        <input type="text" id="myname" value="无名游客" class="form-control display:inline" style="width: auto"><button type="button" class="btn btn-success" id="getMyname" style="width:20% ">更新名字</button>
-        
+        <input type="text" id="myname" value="无名游客" class="form-control display:inline" style="width: auto">
+        <button type="button" class="btn btn-success" id="getMyname" style="width:20% ">更新名字</button>
+
 
         <p id="name-area"></p>
 
-        <div id="chat-wrap"><div id="chat-area"></div></div>
+        <div id="chat-wrap">
+            <div id="chat-area"></div>
+        </div>
 
         <form id="send-message-area">
             <p>Your message: </p>
-            <textarea id="sendie" maxlength = '100' ></textarea>
+            <textarea id="sendie" maxlength='100'></textarea>
         </form>
 
     </div>
-    </div>
+</div>
 
 </body>
 <script type="text/javascript">
- //var name = prompt("Enter your chat name:", "Guest");
+    //var name = prompt("Enter your chat name:", "Guest");
 
-  //初始名字为"无名游客"
-          var name="无名游客";
-  //从input栏获取名字的值为用户的名字
-         $(function(){
-          $("#getMyname").click(function(){
+    //初始名字为"无名游客"
+    var name = "无名游客";
+    //从input栏获取名字的值为用户的名字
+    $(function () {
+        $("#getMyname").click(function () {
 
-            name= $("#myname").val();
+            name = $("#myname").val();
 
-           // 如果不填名字 默认为"我是傻逼"
-      if (!name || name === '') {
-         name = "我是傻逼";
-      }
+            // 如果不填名字 默认为"我是傻逼"
+            if (!name || name === '') {
+                name = "我是傻逼";
+            }
 
-             name = name.replace(/(<([^>]+)>)/ig,"");
+            name = name.replace(/(<([^>]+)>)/ig, "");
 
-      // 把名字显示在浏览器里
-      $("#name-area").html("你是: <span>" + name + "</span>");
-          })
+            // 把名字显示在浏览器里
+            $("#name-area").html("你是: <span>" + name + "</span>");
+        })
 
 
-         });
-    
-       
-      
+    });
 
-      // strip tags
-     
 
-      // kick off chat
-        var chat =  new Chat();
-      $(function() {
+    // strip tags
 
-         chat.getState();
 
-         // watch textarea for key presses
-             $("#sendie").keydown(function(event) {
+    // kick off chat
+    var chat = new Chat();
+    $(function () {
 
-                 var key = event.which;
+        chat.getState();
 
-                 //all keys including return.
-                 if (key >= 33) {
+        // watch textarea for key presses
+        $("#sendie").keydown(function (event) {
 
-                     var maxLength = $(this).attr("maxlength");
-                     var length = this.value.length;
+            var key = event.which;
 
-                     // don't allow new content if length is maxed out
-                     if (length >= maxLength) {
-                         event.preventDefault();
-                     }
-                  }
-                                                                                                        });
-         // watch textarea for release of key press
-         $('#sendie').keyup(function(e) {
+            //all keys including return.
+            if (key >= 33) {
+
+                var maxLength = $(this).attr("maxlength");
+                var length = this.value.length;
+
+                // don't allow new content if length is maxed out
+                if (length >= maxLength) {
+                    event.preventDefault();
+                }
+            }
+        });
+        // watch textarea for release of key press
+        $('#sendie').keyup(function (e) {
 
             if (e.keyCode == 13) {
 
-                    var text = $(this).val();
-            var maxLength = $(this).attr("maxlength");
-                    var length = text.length;
+                var text = $(this).val();
+                var maxLength = $(this).attr("maxlength");
+                var length = text.length;
 
-                    // send 
-                    if (length <= maxLength + 1) {
+                // send
+                if (length <= maxLength + 1) {
 
-                  chat.send(text, name);
-                  $(this).val("");
+                    chat.send(text, name);
+                    $(this).val("");
 
-                    } else {
+                } else {
 
-              $(this).val(text.substring(0, maxLength));
+                    $(this).val(text.substring(0, maxLength));
+
+                }
+
 
             }
+        });
 
-
-            }
-             });
-
-      });
-    </script>
-    <script type="text/javascript">
+    });
+</script>
+<script type="text/javascript">
     var content = "";
     var inNew = getCookie("inNew");
     var searcher = getCookie("searcher");
